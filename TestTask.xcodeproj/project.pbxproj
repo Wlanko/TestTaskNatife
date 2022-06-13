@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB9CA3462857F45500F8911C /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9CA3452857F45500F8911C /* DateManager.swift */; };
 		BBD5067A28578E3300DD7DF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD5067928578E3300DD7DF6 /* AppDelegate.swift */; };
 		BBD5067C28578E3300DD7DF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD5067B28578E3300DD7DF6 /* SceneDelegate.swift */; };
 		BBD5067E28578E3300DD7DF6 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD5067D28578E3300DD7DF6 /* PostsViewController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB9CA3452857F45500F8911C /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		BBD5067628578E3300DD7DF6 /* TestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBD5067928578E3300DD7DF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBD5067B28578E3300DD7DF6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				BBD5068428578E3500DD7DF6 /* LaunchScreen.storyboard */,
 				BBD5068728578E3500DD7DF6 /* Info.plist */,
 				BBE6D8DB2857B02C007B848B /* NetworkManager.swift */,
+				BB9CA3452857F45500F8911C /* DateManager.swift */,
 			);
 			path = TestTask;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				BBD5067A28578E3300DD7DF6 /* AppDelegate.swift in Sources */,
 				BBE6D8D42857A2B1007B848B /* Posts.swift in Sources */,
 				BBE6D8E12857BE35007B848B /* PostsPresenter.swift in Sources */,
+				BB9CA3462857F45500F8911C /* DateManager.swift in Sources */,
 				BBE6D8D128579F35007B848B /* PostTableViewCell.swift in Sources */,
 				BBD5067C28578E3300DD7DF6 /* SceneDelegate.swift in Sources */,
 			);

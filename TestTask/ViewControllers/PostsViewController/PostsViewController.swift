@@ -18,9 +18,8 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.loadData(endpoint: "/main.json")
+        mainTableView?.dataSource = self
     }
-    
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.posts.count
@@ -29,14 +28,14 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
         cell.setData(postinfo: presenter.posts[indexPath.row])
-        
-        return PostTableViewCell()
+        return cell
     }
 
 }
 
 extension PostsViewController: PostsViewPresenter {
     func dataIsUpdated() {
-        mainTableView?.reloadData()
+        print(presenter.posts[0])
+        mainTableView!.reloadData()
     }
 }

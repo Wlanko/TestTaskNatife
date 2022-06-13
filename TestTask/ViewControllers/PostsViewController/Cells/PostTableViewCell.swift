@@ -14,6 +14,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel?
     @IBOutlet weak var expandButton: UIButton?
     
+    let dateManager = DateManager()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,8 +30,8 @@ class PostTableViewCell: UITableViewCell {
     func setData(postinfo: Post?) {
         titleLabel?.text = postinfo?.title
         descriptionLabel?.text = postinfo?.preview_text
-        likesLabel?.text = String(postinfo?.likes_count ?? 0)
-        
+        likesLabel?.text = "❤️ \(String(postinfo?.likes_count ?? 0))"
+        dateLabel?.text = dateManager.getTimeForPost(timestamp: Double(postinfo!.timeshamp))
     }
 
 }

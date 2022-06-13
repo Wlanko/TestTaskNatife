@@ -17,22 +17,21 @@ class PostsPresenter {
     }
     
     func loadData(endpoint: String) {
-        networkManager.makeRequest(endpoint: endpoint) { result in
+        networkManager.makeRequest(endpoint: endpoint) { [self] result in
             switch result {
             case .success(let data):
-                self.manageJSON(data: data)
+                do {
+                    self.postsList = try JSONDecoder().decode(PostsList.self, from: data)
+                    posts = postsList?.posts as! [Post]
+                } catch {
+                    print("Is that really JSON?")
+                }
             case .failure(let error):
                 print(error)
             }
-        }
-    }
-    
-    func manageJSON(data: Data) {
-        do {
-            self.postsList = try JSONDecoder().decode(PostsList.self, from: data)
-            posts = postsList?.posts as! [Post]
-        } catch {
-            print("Is that really JSON?")
+            DispatchQueue.main.async { [self] in
+                view?.dataIsUpdated()
+            }
         }
     }
 }
