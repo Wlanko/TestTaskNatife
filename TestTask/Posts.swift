@@ -27,3 +27,7 @@ struct PostInfo: Codable {
     let postImage: URL
     let likes_count: Int
 }
+
+struct PostById: Codable {
+    let post: PostInfo
+}

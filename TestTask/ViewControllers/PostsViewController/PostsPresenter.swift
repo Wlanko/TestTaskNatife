@@ -21,7 +21,7 @@ class PostsPresenter {
             switch result {
             case .success(let data):
                 do {
-                    self.postsList = try JSONDecoder().decode(PostsList.self, from: data)
+                    postsList = try JSONDecoder().decode(PostsList.self, from: data)
                     posts = postsList?.posts as! [Post]
                 } catch {
                     print("Is that really JSON?")

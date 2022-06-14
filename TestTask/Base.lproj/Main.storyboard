@@ -34,7 +34,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNd-OL-gVa">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNd-OL-gVa">
                                                     <rect key="frame" x="25" y="45.5" width="364" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -63,6 +63,9 @@
                                                         <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
                                                         <color key="baseBackgroundColor" systemColor="systemGrayColor"/>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="expandButton:" destination="qnQ-p0-KM3" eventType="touchUpInside" id="qhN-e1-eOU"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -85,7 +88,6 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="Y8x-s9-e8Q" id="qXD-ir-vey"/>
                                             <outlet property="descriptionLabel" destination="DNd-OL-gVa" id="9co-PS-ycJ"/>
-                                            <outlet property="expandButton" destination="hLE-10-xxc" id="D0v-5h-DbS"/>
                                             <outlet property="likesLabel" destination="rcb-ZM-f9A" id="Wn9-tI-dXW"/>
                                             <outlet property="titleLabel" destination="2sR-bA-aNm" id="CnB-hu-JDp"/>
                                         </connections>
@@ -111,10 +113,10 @@
             </objects>
             <point key="canvasLocation" x="1114.4927536231885" y="105.80357142857143"/>
         </scene>
-        <!--View Controller-->
+        <!--PostViewController-->
         <scene sceneID="bIG-07-vRI">
             <objects>
-                <viewController id="ZbT-4O-sr2" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostViewController" title="PostViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZbT-4O-sr2" customClass="PostViewController" customModule="TestTask" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f8K-j9-SFZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,7 +125,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="314" id="rcl-OC-Agg">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageCell" rowHeight="314" id="rcl-OC-Agg" customClass="ImageTableViewCell" customModule="TestTask" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="314"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rcl-OC-Agg" id="rqu-k0-uxG">
@@ -141,22 +143,25 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="fae-xR-eOM" secondAttribute="bottom" id="tfj-hM-TsM"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="postImage" destination="fae-xR-eOM" id="gAG-iC-cCE"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="291" id="RP3-MR-3fQ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TitleAndDescriptionCell" rowHeight="291" id="RP3-MR-3fQ" customClass="DescriptionTableViewCell" customModule="TestTask" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="358.5" width="414" height="291"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RP3-MR-3fQ" id="0IC-Ir-7Ea">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="291"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8U-HW-RIz">
-                                                    <rect key="frame" x="25" y="16" width="42" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8U-HW-RIz">
+                                                    <rect key="frame" x="25" y="16" width="41.5" height="24"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3Y-tR-GaK">
-                                                    <rect key="frame" x="26" y="45" width="32" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Text" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3Y-tR-GaK">
+                                                    <rect key="frame" x="25" y="45" width="364" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -164,13 +169,19 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="L3Y-tR-GaK" firstAttribute="leading" secondItem="0IC-Ir-7Ea" secondAttribute="leadingMargin" constant="5" id="4sh-dk-oZD"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="L3Y-tR-GaK" secondAttribute="bottom" constant="5" id="VeY-Q7-qtB"/>
                                                 <constraint firstItem="N8U-HW-RIz" firstAttribute="leading" secondItem="0IC-Ir-7Ea" secondAttribute="leadingMargin" constant="5" id="g7B-hJ-njr"/>
                                                 <constraint firstItem="N8U-HW-RIz" firstAttribute="top" secondItem="0IC-Ir-7Ea" secondAttribute="topMargin" constant="5" id="hyy-CL-TC3"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="L3Y-tR-GaK" secondAttribute="trailing" constant="5" id="mb1-Za-jNh"/>
                                                 <constraint firstItem="L3Y-tR-GaK" firstAttribute="top" secondItem="N8U-HW-RIz" secondAttribute="bottom" constant="5" id="qKr-ep-9x8"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="L3Y-tR-GaK" id="SQu-TM-Tbj"/>
+                                            <outlet property="titleLabel" destination="N8U-HW-RIz" id="1dX-RN-atB"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="52" id="v3c-mO-ZDg">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LikesAndDateCell" rowHeight="52" id="v3c-mO-ZDg" customClass="LikesAndDateTableViewCell" customModule="TestTask" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="649.5" width="414" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v3c-mO-ZDg" id="MAw-kH-fE5">
@@ -199,6 +210,10 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="n9t-Pb-JkI" secondAttribute="bottom" constant="5" id="hwo-XA-jaS"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="n9t-Pb-JkI" id="QQk-VR-Jig"/>
+                                            <outlet property="likesLabel" destination="V4m-4A-4fc" id="nGU-zi-WI6"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -212,6 +227,9 @@
                             <constraint firstItem="H0U-IN-wmP" firstAttribute="leading" secondItem="ECe-kh-cMT" secondAttribute="leading" id="zPa-lE-ped"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="postTableView" destination="H0U-IN-wmP" id="FNf-M4-Xry"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7pj-Xe-601" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

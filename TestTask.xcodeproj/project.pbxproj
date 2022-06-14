@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		BB9CA3462857F45500F8911C /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9CA3452857F45500F8911C /* DateManager.swift */; };
+		BBCF29E32859086C00ED5441 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF29E22859086C00ED5441 /* PostViewController.swift */; };
+		BBCF29E7285908BC00ED5441 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF29E6285908BC00ED5441 /* ImageTableViewCell.swift */; };
+		BBCF29E9285908D000ED5441 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF29E8285908D000ED5441 /* DescriptionTableViewCell.swift */; };
+		BBCF29EB285908E300ED5441 /* LikesAndDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF29EA285908E300ED5441 /* LikesAndDateTableViewCell.swift */; };
+		BBCF29ED28590A7000ED5441 /* PostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF29EC28590A7000ED5441 /* PostPresenter.swift */; };
 		BBD5067A28578E3300DD7DF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD5067928578E3300DD7DF6 /* AppDelegate.swift */; };
 		BBD5067C28578E3300DD7DF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD5067B28578E3300DD7DF6 /* SceneDelegate.swift */; };
 		BBD5067E28578E3300DD7DF6 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD5067D28578E3300DD7DF6 /* PostsViewController.swift */; };
@@ -43,6 +48,11 @@
 
 /* Begin PBXFileReference section */
 		BB9CA3452857F45500F8911C /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		BBCF29E22859086C00ED5441 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		BBCF29E6285908BC00ED5441 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		BBCF29E8285908D000ED5441 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		BBCF29EA285908E300ED5441 /* LikesAndDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesAndDateTableViewCell.swift; sourceTree = "<group>"; };
+		BBCF29EC28590A7000ED5441 /* PostPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPresenter.swift; sourceTree = "<group>"; };
 		BBD5067628578E3300DD7DF6 /* TestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBD5067928578E3300DD7DF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBD5067B28578E3300DD7DF6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +98,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BBCF29E42859087A00ED5441 /* PostDetail */ = {
+			isa = PBXGroup;
+			children = (
+				BBCF29EC28590A7000ED5441 /* PostPresenter.swift */,
+				BBCF29E22859086C00ED5441 /* PostViewController.swift */,
+				BBCF29E52859088C00ED5441 /* Cells */,
+			);
+			path = PostDetail;
+			sourceTree = "<group>";
+		};
+		BBCF29E52859088C00ED5441 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BBCF29E6285908BC00ED5441 /* ImageTableViewCell.swift */,
+				BBCF29E8285908D000ED5441 /* DescriptionTableViewCell.swift */,
+				BBCF29EA285908E300ED5441 /* LikesAndDateTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		BBD5066D28578E3300DD7DF6 = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +183,7 @@
 		BBE6D8DD2857BDEB007B848B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				BBCF29E42859087A00ED5441 /* PostDetail */,
 				BBE6D8DE2857BDFD007B848B /* PostsViewController */,
 			);
 			path = ViewControllers;
@@ -313,12 +344,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBCF29E32859086C00ED5441 /* PostViewController.swift in Sources */,
+				BBCF29ED28590A7000ED5441 /* PostPresenter.swift in Sources */,
 				BBE6D8DC2857B02C007B848B /* NetworkManager.swift in Sources */,
+				BBCF29E9285908D000ED5441 /* DescriptionTableViewCell.swift in Sources */,
 				BBD5067E28578E3300DD7DF6 /* PostsViewController.swift in Sources */,
 				BBD5067A28578E3300DD7DF6 /* AppDelegate.swift in Sources */,
 				BBE6D8D42857A2B1007B848B /* Posts.swift in Sources */,
+				BBCF29EB285908E300ED5441 /* LikesAndDateTableViewCell.swift in Sources */,
 				BBE6D8E12857BE35007B848B /* PostsPresenter.swift in Sources */,
 				BB9CA3462857F45500F8911C /* DateManager.swift in Sources */,
+				BBCF29E7285908BC00ED5441 /* ImageTableViewCell.swift in Sources */,
 				BBE6D8D128579F35007B848B /* PostTableViewCell.swift in Sources */,
 				BBD5067C28578E3300DD7DF6 /* SceneDelegate.swift in Sources */,
 			);
