@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ImageTableViewCell: UITableViewCell {
     @IBOutlet weak var postImage: UIImageView!
@@ -22,7 +23,7 @@ class ImageTableViewCell: UITableViewCell {
     }
     
     func setData(url: URL) {
-        
+        postImage.kf.setImage(with: url)
     }
 
 }
