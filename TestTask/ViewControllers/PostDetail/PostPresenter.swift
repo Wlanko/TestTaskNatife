@@ -8,31 +8,25 @@
 import Foundation
 import UIKit
 
-class PostPresenter {
-    var networkManager = NetworkManager()
+class PostPresenter: DataSeted {
+    var postManager = PostManager()
     var postInfo: PostInfo?
     var postByID: PostById?
+    var postID: Int
     weak var view: PostsViewPresenter?
-    init(with view: PostViewController) {
+    
+    init(with postID: Int, view: PostsViewPresenter) {
         self.view = view
+        self.postID = postID
     }
     
-    func loadData(endpoint: String) {
-        networkManager.makeRequest(endpoint: endpoint) { [self] result in
-            switch result {
-                case .success(let data):
-                    do {
-                        postByID = try JSONDecoder().decode(PostById.self, from: data)
-                        postInfo = postByID?.post
-                    } catch {
-                        print("Is it really JSON")
-                    }
-                case .failure(let error):
-                    print(error)
-            }
-            DispatchQueue.main.async {
-                self.view?.dataIsUpdated()
-            }
-        }
+    
+    func loadData() {
+        postManager.getPostInfo(obj: self, postID: postID)
+    }
+    
+    func dataSeted() {
+        postInfo = postManager.postInfo
+        view?.dataIsUpdated()
     }
 }

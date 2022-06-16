@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostTableViewCell" rowHeight="167" id="qnQ-p0-KM3" customClass="PostTableViewCell" customModule="TestTask" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostTableViewCell" rowHeight="167" id="qnQ-p0-KM3" customClass="PostCell" customModule="TestTask" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="167"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qnQ-p0-KM3" id="Vet-xx-Xo8">
@@ -105,11 +105,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="News Line" id="0eZ-hN-ptr">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="compose" id="rqz-Nl-ZUE">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="sortButton:" destination="BYZ-38-t0r" id="AE8-6w-5vn"/>
-                            </connections>
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="Ti9-uO-3TZ">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Azn-Pg-F1I">
+                                <rect key="frame" x="302" y="5" width="92" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="arrow.up.arrow.down.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="sortButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aoR-Ug-QQk"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -118,7 +123,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1114.4927536231885" y="105.80357142857143"/>
+            <point key="canvasLocation" x="1357" y="106"/>
         </scene>
         <!--Post-->
         <scene sceneID="bIG-07-vRI">
@@ -132,7 +137,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageCell" rowHeight="356" id="rcl-OC-Agg" customClass="ImageTableViewCell" customModule="TestTask" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageCell" rowHeight="356" id="rcl-OC-Agg" customClass="ImageCell" customModule="TestTask" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="356"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rcl-OC-Agg" id="rqu-k0-uxG">
@@ -157,7 +162,7 @@
                                             <outlet property="postImage" destination="fae-xR-eOM" id="gAG-iC-cCE"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TitleAndDescriptionCell" rowHeight="291" id="RP3-MR-3fQ" customClass="DescriptionTableViewCell" customModule="TestTask" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TitleAndDescriptionCell" rowHeight="291" id="RP3-MR-3fQ" customClass="DescriptionCell" customModule="TestTask" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="400.5" width="414" height="291"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RP3-MR-3fQ" id="0IC-Ir-7Ea">
@@ -192,7 +197,7 @@
                                             <outlet property="titleLabel" destination="N8U-HW-RIz" id="1dX-RN-atB"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LikesAndDateCell" rowHeight="52" id="v3c-mO-ZDg" customClass="LikesAndDateTableViewCell" customModule="TestTask" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LikesAndDateCell" rowHeight="52" id="v3c-mO-ZDg" customClass="LikesAndDateCell" customModule="TestTask" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="691.5" width="414" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v3c-mO-ZDg" id="MAw-kH-fE5">
@@ -266,6 +271,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.up.arrow.down.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

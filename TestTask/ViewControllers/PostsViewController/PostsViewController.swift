@@ -11,7 +11,7 @@ protocol PostsViewPresenter: AnyObject {
     func dataIsUpdated()
 }
 
-protocol PostPushView: AnyObject {
+protocol PostCellDelegate: AnyObject {
     func push(postID: Int)
 }
 
@@ -33,20 +33,22 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
-        cell.setData(postinfo: presenter.posts[indexPath.row], view: self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostCell
+        cell.setData(postinfo: presenter.posts[indexPath.row], delegate: self)
         return cell
     }
     
     @IBAction func sortButton(_ sender: Any) {
         let sortByActionSheet = UIAlertController(title: "Sort by", message: nil, preferredStyle: .actionSheet)
-        sortByActionSheet.addAction(UIAlertAction(title: "Date", style: .default) { [self]action in
-            sortBy = .date
-            presenter.sortPosts(sortBy: sortBy)
+        sortByActionSheet.addAction(UIAlertAction(title: "Date", style: .default) { [weak self] action in
+            guard let self = self else { return }
+            self.sortBy = .date
+            self.presenter.sortPosts(sortBy: self.sortBy)
         })
-        sortByActionSheet.addAction(UIAlertAction(title: "Likes", style: .default){ [self] action in
-            sortBy = .likes
-            presenter.sortPosts(sortBy: sortBy)
+        sortByActionSheet.addAction(UIAlertAction(title: "Likes", style: .default) { [weak self] action in
+            guard let self = self else { return }
+            self.sortBy = .likes
+            self.presenter.sortPosts(sortBy: self.sortBy)
         })
         sortByActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
@@ -57,15 +59,13 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
 extension PostsViewController: PostsViewPresenter {
     func dataIsUpdated() {
-        print(presenter.posts[0])
         mainTableView!.reloadData()
     }
 }
 
-extension PostsViewController: PostPushView {
+extension PostsViewController: PostCellDelegate {
     func push(postID: Int) {
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PostViewController") as! PostViewController
-        vc.postID = postID
+        guard let vc = PostModule.buildModule(postId: postID) else { return }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

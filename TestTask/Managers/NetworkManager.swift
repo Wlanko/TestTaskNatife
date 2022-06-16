@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+// TODO: create PostsManager
 class NetworkManager {
     enum NetworkError: Error {
         case wrongURL
@@ -40,17 +40,5 @@ class NetworkManager {
                 completion(.success(data))
             }
         }).resume()
-    }
-}
-
-func testRequest() {
-    let net = NetworkManager()
-    net.makeRequest(endpoint: "/test") { result in
-        switch result{
-        case .success(let data):
-            print(data)
-        case .failure(let error):
-            print(error.localizedDescription)
-        }
     }
 }

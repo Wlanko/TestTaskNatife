@@ -7,43 +7,41 @@
 
 import Foundation
 
-class PostsPresenter {
-    var networkManager = NetworkManager()
+protocol DataSeted {
+    func dataSeted()
+}
+
+class PostsPresenter: DataSeted {
+    var postManager = PostManager()
     var postsList: PostsList?
     var posts = [Post]()
     weak var view: PostsViewPresenter?
+    
     init(with view: PostsViewPresenter) {
         self.view = view
     }
     
     func loadData(endpoint: String) {
-        networkManager.makeRequest(endpoint: endpoint) { [self] result in
-            switch result {
-            case .success(let data):
-                do {
-                    postsList = try JSONDecoder().decode(PostsList.self, from: data)
-                    posts = postsList?.posts as! [Post]
-                } catch {
-                    print("Is that really JSON?")
-                }
-            case .failure(let error):
-                print(error)
-            }
-            DispatchQueue.main.async { [self] in
-                view?.dataIsUpdated()
-            }
-        }
+        postManager.getPostsList(obj: self)
     }
     
     func sortPosts(sortBy: SortBy) {
         switch sortBy {
         case .date:
-            posts.sort(by: <)
-            posts = posts.reversed()
+            posts.sort { lhs, rhs in
+                return lhs.timeshamp > rhs.timeshamp
+            }
         case .likes:
-            posts.sort(by: >)
+            posts.sort { lhs, rhs in
+                return lhs.likes_count > rhs.likes_count
+            }
         }
         
+        view?.dataIsUpdated()
+    }
+    
+    func dataSeted() {
+        posts = postManager.posts
         view?.dataIsUpdated()
     }
 }
