@@ -12,22 +12,28 @@ class DateManager {
         let postDate = Date(timeIntervalSince1970: timestamp) 
         let currentDate = Date()
         var result = String()
-        let dateFormatter = DateFormatter()
         let difference = currentDate.timeIntervalSince1970 - timestamp
         
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM"
         
+        let minute = Double(60)
+        let hour = Double(60*60)
+        let day = Double(60*60*24)
+        let week = Double(60*60*24*7)
+        let month = Double(60*60*24*7*4)
+        
         switch difference {
-        case  0 ..< 60:
+        case  0 ..< minute:
             result = "\(difference) sec ago"
-        case 60 ..< 3600:
-            result = "\(Int(difference / 60)) min ago"
-        case 3600 ..< 86400:
-            result = "\(Int(difference / 3600)) hours ago"
-        case 86400 ..< 604800:
-            result = "\(Int(difference / 86400)) days ago"
-        case 604800 ..< 2419200:
-            result = "\(Int(difference / 604800)) weeks"
+        case minute ..< hour:
+            result = "\(Int(difference / minute)) min ago"
+        case hour ..< day:
+            result = "\(Int(difference / hour)) hours ago"
+        case day ..< week:
+            result = "\(Int(difference / day)) days ago"
+        case week ..< month:
+            result = "\(Int(difference / week)) weeks"
         default:
             result = "\(dateFormatter.string(from: postDate))"
         }

@@ -12,50 +12,57 @@ class PostManager {
     var posts = [Post]()
     var postInfo: PostInfo?
     
-    func getPostsList(obj: DataSeted) {
-        let endpoint = "/main.json"
-        
+    func getPostsList(complition: @escaping (_ posts: [Post] ) -> Void) {
         var postsList: PostsList?
         
-        networkManager.makeRequest(endpoint: endpoint) { result in
+        networkManager.makeRequest(endpoint: Endpoint.posts.enpoint) { result in
             switch result {
             case .success(let data):
                 do {
                     postsList = try JSONDecoder().decode(PostsList.self, from: data)
                     self.posts =  postsList?.posts as! [Post]
-                    print(self.posts)
+                    complition(self.posts)
                 } catch {
                     print("Is that really JSON?")
                 }
             case .failure(let error):
                 print(error)
             }
-
+            
             DispatchQueue.main.async {
-                obj.dataSeted()
+                //obj.dataSeted()
             }
         }
     }
     
-    func getPostInfo(obj: DataSeted, postID: Int) {
-        let endpoint = "/posts/\(postID).json"
-        
+    func getPostInfo(postID: Int, complition: @escaping (_ postInfo: PostInfo) -> Void) {
         var postByID: PostById?
         
-        networkManager.makeRequest(endpoint: endpoint) { [self] result in
+        networkManager.makeRequest(endpoint: Endpoint.post(id: postID).enpoint) { [self] result in
             switch result {
-                case .success(let data):
-                    do {
-                        postByID = try JSONDecoder().decode(PostById.self, from: data)
-                        postInfo = postByID?.post
-                    } catch {
-                        print("Is it really JSON")
-                    }
-                case .failure(let error):
-                    print(error)
+            case .success(let data):
+                do {
+                    postByID = try JSONDecoder().decode(PostById.self, from: data)
+                    postInfo = postByID?.post
+                    complition(postInfo!)
+                } catch {
+                    print("Is it really JSON")
+                }
+            case .failure(let error):
+                print(error)
             }
-            DispatchQueue.main.async {
-                obj.dataSeted()
+        }
+    }
+    
+    enum Endpoint {
+        case posts
+        case post(id: Int)
+        var enpoint: String {
+            switch self {
+            case .posts:
+                return "/main.json"
+            case .post(let id):
+                return "/posts/\(id).json"
             }
         }
     }

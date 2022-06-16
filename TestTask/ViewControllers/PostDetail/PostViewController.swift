@@ -31,22 +31,24 @@ class PostViewController: UIViewController, UITableViewDataSource {
     }
     
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
         return 3
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = postTableView?.dequeueReusableCell(withIdentifier: "TitleAndDescriptionCell") as! DescriptionCell
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TitleAndDescriptionCell") as! DescriptionCell
         cell.setData(title: presenter?.postInfo?.title ?? "None", description: presenter?.postInfo?.text ?? "-")
         
         switch indexPath.row {
             case 0:
-                let imageCell = postTableView?.dequeueReusableCell(withIdentifier: "ImageCell") as! ImageCell
+                let imageCell = tableView.dequeueReusableCell(withIdentifier: "ImageCell") as! ImageCell
                 imageCell.setData(url: presenter?.postInfo?.postImage)
             
                 return imageCell
             case 2:
-                let likesAndDateCell = postTableView?.dequeueReusableCell(withIdentifier: "LikesAndDateCell") as! LikesAndDateCell
+                let likesAndDateCell = tableView.dequeueReusableCell(withIdentifier: "LikesAndDateCell") as! LikesAndDateCell
                 likesAndDateCell.setData(likes: presenter?.postInfo?.likes_count ?? 0, date: presenter?.postInfo?.timeshamp ?? Int(Date().timeIntervalSince1970))
                 
                 return likesAndDateCell

@@ -7,11 +7,7 @@
 
 import Foundation
 
-protocol DataSeted {
-    func dataSeted()
-}
-
-class PostsPresenter: DataSeted {
+class PostsPresenter {
     var postManager = PostManager()
     var postsList: PostsList?
     var posts = [Post]()
@@ -22,7 +18,12 @@ class PostsPresenter: DataSeted {
     }
     
     func loadData(endpoint: String) {
-        postManager.getPostsList(obj: self)
+        postManager.getPostsList() { posts in
+            self.posts = posts
+            DispatchQueue.main.async {
+                self.view?.dataIsUpdated()
+            }
+        }
     }
     
     func sortPosts(sortBy: SortBy) {
@@ -37,11 +38,6 @@ class PostsPresenter: DataSeted {
             }
         }
         
-        view?.dataIsUpdated()
-    }
-    
-    func dataSeted() {
-        posts = postManager.posts
         view?.dataIsUpdated()
     }
 }

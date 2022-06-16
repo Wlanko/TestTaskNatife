@@ -130,6 +130,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		BBCF29F6285BB46500ED5441 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BBE6D8D32857A2B1007B848B /* Posts.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		BBD5066D28578E3300DD7DF6 = {
 			isa = PBXGroup;
 			children = (
@@ -153,11 +161,11 @@
 		BBD5067828578E3300DD7DF6 /* TestTask */ = {
 			isa = PBXGroup;
 			children = (
+				BBCF29F6285BB46500ED5441 /* Models */,
 				BBCF29F3285B507700ED5441 /* Managers */,
 				BBE6D8DD2857BDEB007B848B /* ViewControllers */,
 				BBD5067928578E3300DD7DF6 /* AppDelegate.swift */,
 				BBD5067B28578E3300DD7DF6 /* SceneDelegate.swift */,
-				BBE6D8D32857A2B1007B848B /* Posts.swift */,
 				BBD5067F28578E3300DD7DF6 /* Main.storyboard */,
 				BBD5068228578E3500DD7DF6 /* Assets.xcassets */,
 				BBD5068428578E3500DD7DF6 /* LaunchScreen.storyboard */,

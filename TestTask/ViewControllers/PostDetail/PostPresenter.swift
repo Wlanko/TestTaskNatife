@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class PostPresenter: DataSeted {
+class PostPresenter {
     var postManager = PostManager()
     var postInfo: PostInfo?
     var postByID: PostById?
@@ -22,11 +22,11 @@ class PostPresenter: DataSeted {
     
     
     func loadData() {
-        postManager.getPostInfo(obj: self, postID: postID)
-    }
-    
-    func dataSeted() {
-        postInfo = postManager.postInfo
-        view?.dataIsUpdated()
+        postManager.getPostInfo(postID: postID) { postInfo in
+            self.postInfo = postInfo
+            DispatchQueue.main.async {
+                self.view?.dataIsUpdated()
+            }
+        }
     }
 }

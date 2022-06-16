@@ -6,7 +6,7 @@
 //
 
 import Foundation
-// TODO: create PostsManager
+ 
 class NetworkManager {
     enum NetworkError: Error {
         case wrongURL
