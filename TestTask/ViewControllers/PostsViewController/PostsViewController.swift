@@ -18,9 +18,12 @@ protocol PostPushView: AnyObject {
 class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var mainTableView: UITableView?
     lazy var presenter = PostsPresenter(with: self)
+    var sortBy: SortBy = .date
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "News Line"
+        //configureItems()
         presenter.loadData(endpoint: "/main.json")
         mainTableView?.dataSource = self
     }
@@ -33,6 +36,21 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
         cell.setData(postinfo: presenter.posts[indexPath.row], view: self)
         return cell
+    }
+    
+    @IBAction func sortButton(_ sender: Any) {
+        let sortByActionSheet = UIAlertController(title: "Sort by", message: nil, preferredStyle: .actionSheet)
+        sortByActionSheet.addAction(UIAlertAction(title: "Date", style: .default) { [self]action in
+            sortBy = .date
+            presenter.sortPosts(sortBy: sortBy)
+        })
+        sortByActionSheet.addAction(UIAlertAction(title: "Likes", style: .default){ [self] action in
+            sortBy = .likes
+            presenter.sortPosts(sortBy: sortBy)
+        })
+        sortByActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(sortByActionSheet, animated: true)
     }
 
 }

@@ -7,12 +7,19 @@
 
 import Foundation
 
-struct Post: Codable {
+struct Post: Codable, Comparable {
     let postId: Int
     let timeshamp: Int
     let title: String
     let preview_text: String
     let likes_count: Int
+    
+    static func < (lhs: Post, rhs: Post) -> Bool {
+        return lhs.timeshamp < rhs.timeshamp
+    }
+    static func > (lhs: Post, rhs: Post) -> Bool {
+        return lhs.likes_count > rhs.likes_count
+    }
 }
 
 struct PostsList: Codable {
@@ -30,4 +37,9 @@ struct PostInfo: Codable {
 
 struct PostById: Codable {
     let post: PostInfo
+}
+
+enum SortBy {
+    case date
+    case likes
 }

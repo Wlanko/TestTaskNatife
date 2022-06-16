@@ -145,7 +145,6 @@
 				BBD5067928578E3300DD7DF6 /* AppDelegate.swift */,
 				BBD5067B28578E3300DD7DF6 /* SceneDelegate.swift */,
 				BBE6D8D32857A2B1007B848B /* Posts.swift */,
-				BBE6D8D228579F58007B848B /* MainScreen */,
 				BBD5067F28578E3300DD7DF6 /* Main.storyboard */,
 				BBD5068228578E3500DD7DF6 /* Assets.xcassets */,
 				BBD5068428578E3500DD7DF6 /* LaunchScreen.storyboard */,
@@ -171,13 +170,6 @@
 				BBD5069C28578E3500DD7DF6 /* TestTaskUITestsLaunchTests.swift */,
 			);
 			path = TestTaskUITests;
-			sourceTree = "<group>";
-		};
-		BBE6D8D228579F58007B848B /* MainScreen */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MainScreen;
 			sourceTree = "<group>";
 		};
 		BBE6D8DD2857BDEB007B848B /* ViewControllers */ = {

@@ -29,18 +29,30 @@ class DateManager {
         let year = calendar.component(.year, from: currentDate)
         
         if year == postYear {
-            if day == postDay {
-                if hour == postHour {
-                    if minute == postMinute {
-                        result = "1 min ago"
+            if month == postMonth {
+                if day == postDay {
+                    if hour == postHour {
+                        if minute == postMinute {
+                            result = "1 min ago"
+                        } else {
+                            result = "\(minute - postMinute) min ago"
+                        }
                     } else {
-                        result = "\(minute - postMinute) min ago"
+                        result = "\(hour - postHour) hours ago"
                     }
                 } else {
-                    result = "\(hour - postHour) min ago"
+                    if day - postDay < 7 {
+                        result = "\(day - postDay) days ago"
+                    } else {
+                        result = "\((day - postDay)/7) weeks ago"
+                    }
                 }
             } else {
-                result = "\(day).\(month)"
+                if postMonth < 10 {
+                    result = "\(postDay).0\(postMonth)"
+                } else {
+                    result = "\(postDay).\(postMonth)"
+                }
             }
         }
         

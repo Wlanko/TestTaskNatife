@@ -34,4 +34,16 @@ class PostsPresenter {
             }
         }
     }
+    
+    func sortPosts(sortBy: SortBy) {
+        switch sortBy {
+        case .date:
+            posts.sort(by: <)
+            posts = posts.reversed()
+        case .likes:
+            posts.sort(by: >)
+        }
+        
+        view?.dataIsUpdated()
+    }
 }
