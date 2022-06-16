@@ -12,7 +12,7 @@ class PostManager {
     var posts = [Post]()
     var postInfo: PostInfo?
     
-    func getPostsList(complition: @escaping (_ posts: [Post] ) -> Void) {
+    func getPostsList(complition: @escaping (_ result: Result<Data, Error>) -> Void) {
         var postsList: PostsList?
         
         networkManager.makeRequest(endpoint: Endpoint.posts.enpoint) { result in
@@ -21,9 +21,9 @@ class PostManager {
                 do {
                     postsList = try JSONDecoder().decode(PostsList.self, from: data)
                     self.posts =  postsList?.posts as! [Post]
-                    complition(self.posts)
+                    complition(.success(data))
                 } catch {
-                    print("Is that really JSON?")
+                    complition(.failure(error))
                 }
             case .failure(let error):
                 print(error)
@@ -35,7 +35,8 @@ class PostManager {
         }
     }
     
-    func getPostInfo(postID: Int, complition: @escaping (_ postInfo: PostInfo) -> Void) {
+    func getPostInfo(postID: Int,
+                     complition: @escaping (_ result: Result<Data, Error>) -> Void) {
         var postByID: PostById?
         
         networkManager.makeRequest(endpoint: Endpoint.post(id: postID).enpoint) { [self] result in
@@ -44,9 +45,9 @@ class PostManager {
                 do {
                     postByID = try JSONDecoder().decode(PostById.self, from: data)
                     postInfo = postByID?.post
-                    complition(postInfo!)
+                    complition(.success(data))
                 } catch {
-                    print("Is it really JSON")
+                    complition(.failure(error))
                 }
             case .failure(let error):
                 print(error)

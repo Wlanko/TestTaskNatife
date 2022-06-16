@@ -11,6 +11,7 @@ class PostsPresenter {
     var postManager = PostManager()
     var postsList: PostsList?
     var posts = [Post]()
+    var error: Error? = nil
     weak var view: PostsViewPresenter?
     
     init(with view: PostsViewPresenter) {
@@ -18,10 +19,21 @@ class PostsPresenter {
     }
     
     func loadData(endpoint: String) {
-        postManager.getPostsList() { posts in
-            self.posts = posts
+        postManager.getPostsList() { result in
+            switch result {
+            case .success(let data):
+                do {
+                    self.postsList = try JSONDecoder().decode(PostsList.self, from: data)
+                    self.posts =  self.postsList?.posts as! [Post]
+                } catch {
+                    print("Is that really JSON?")
+                }
+            case .failure(let error):
+                print(error)
+                self.error = error
+            }
             DispatchQueue.main.async {
-                self.view?.dataIsUpdated()
+                self.view?.dataIsUpdated(error: self.error)
             }
         }
     }
@@ -38,6 +50,6 @@ class PostsPresenter {
             }
         }
         
-        view?.dataIsUpdated()
+        view?.dataIsUpdated(error: error)
     }
 }

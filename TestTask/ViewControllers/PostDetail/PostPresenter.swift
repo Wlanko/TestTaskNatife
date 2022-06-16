@@ -13,6 +13,7 @@ class PostPresenter {
     var postInfo: PostInfo?
     var postByID: PostById?
     var postID: Int
+    var error: Error? = nil
     weak var view: PostsViewPresenter?
     
     init(with postID: Int, view: PostsViewPresenter) {
@@ -22,10 +23,21 @@ class PostPresenter {
     
     
     func loadData() {
-        postManager.getPostInfo(postID: postID) { postInfo in
-            self.postInfo = postInfo
+        postManager.getPostInfo(postID: postID) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    self.postByID = try JSONDecoder().decode(PostById.self, from: data)
+                    self.postInfo = self.postByID?.post
+                } catch {
+                    print("Is it really JSON")
+                }
+            case .failure(let error):
+                self.error = error
+                print(error)
+            }
             DispatchQueue.main.async {
-                self.view?.dataIsUpdated()
+                self.view?.dataIsUpdated(error: self.error)
             }
         }
     }

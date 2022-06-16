@@ -59,7 +59,15 @@ class PostViewController: UIViewController, UITableViewDataSource {
 }
 
 extension PostViewController: PostsViewPresenter {
-    func dataIsUpdated() {
-        postTableView?.reloadData()
+    func dataIsUpdated(error: Error?) {
+        switch error {
+        case nil:
+            postTableView!.reloadData()
+        default:
+            let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+                                                                                                                 
+            self.present(alert, animated: true)
+        }
     }
 }
