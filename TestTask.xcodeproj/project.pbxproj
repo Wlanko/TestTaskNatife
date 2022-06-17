@@ -14,6 +14,7 @@
 		BBCF29EB285908E300ED5441 /* LikesAndDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF29EA285908E300ED5441 /* LikesAndDateCell.swift */; };
 		BBCF29ED28590A7000ED5441 /* PostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF29EC28590A7000ED5441 /* PostPresenter.swift */; };
 		BBCF29F5285B914800ED5441 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF29F4285B914800ED5441 /* PostManager.swift */; };
+		BBCF29F9285C867500ED5441 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF29F8285C867500ED5441 /* DateExtension.swift */; };
 		BBD5067A28578E3300DD7DF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD5067928578E3300DD7DF6 /* AppDelegate.swift */; };
 		BBD5067C28578E3300DD7DF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD5067B28578E3300DD7DF6 /* SceneDelegate.swift */; };
 		BBD5067E28578E3300DD7DF6 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD5067D28578E3300DD7DF6 /* PostsViewController.swift */; };
@@ -55,6 +56,7 @@
 		BBCF29EA285908E300ED5441 /* LikesAndDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesAndDateCell.swift; sourceTree = "<group>"; };
 		BBCF29EC28590A7000ED5441 /* PostPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPresenter.swift; sourceTree = "<group>"; };
 		BBCF29F4285B914800ED5441 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
+		BBCF29F8285C867500ED5441 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		BBD5067628578E3300DD7DF6 /* TestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBD5067928578E3300DD7DF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBD5067B28578E3300DD7DF6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		BBCF29F7285C865A00ED5441 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BBCF29F8285C867500ED5441 /* DateExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		BBD5066D28578E3300DD7DF6 = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +171,7 @@
 		BBD5067828578E3300DD7DF6 /* TestTask */ = {
 			isa = PBXGroup;
 			children = (
+				BBCF29F7285C865A00ED5441 /* Extensions */,
 				BBCF29F6285BB46500ED5441 /* Models */,
 				BBCF29F3285B507700ED5441 /* Managers */,
 				BBE6D8DD2857BDEB007B848B /* ViewControllers */,
@@ -356,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBCF29E32859086C00ED5441 /* PostViewController.swift in Sources */,
+				BBCF29F9285C867500ED5441 /* DateExtension.swift in Sources */,
 				BBCF29ED28590A7000ED5441 /* PostPresenter.swift in Sources */,
 				BBE6D8DC2857B02C007B848B /* NetworkManager.swift in Sources */,
 				BBCF29E9285908D000ED5441 /* DescriptionCell.swift in Sources */,

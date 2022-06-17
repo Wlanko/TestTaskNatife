@@ -17,20 +17,18 @@ struct PostModule {
     }
 }
 
-class PostViewController: UIViewController, UITableViewDataSource {
+class PostViewController: UIViewController {
     var presenter: PostPresenter?
     
     @IBOutlet weak var postTableView: UITableView?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        postTableView?.separatorStyle = .none
-        postTableView?.dataSource = self
         presenter?.loadData()
-        // Do any additional setup after loading the view.
     }
-    
+}
 
+extension PostViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         return 3
@@ -42,32 +40,31 @@ class PostViewController: UIViewController, UITableViewDataSource {
         cell.setData(title: presenter?.postInfo?.title ?? "None", description: presenter?.postInfo?.text ?? "-")
         
         switch indexPath.row {
-            case 0:
-                let imageCell = tableView.dequeueReusableCell(withIdentifier: "ImageCell") as! ImageCell
-                imageCell.setData(url: presenter?.postInfo?.postImage)
+        case 0:
+            let imageCell = tableView.dequeueReusableCell(withIdentifier: "ImageCell") as! ImageCell
+            imageCell.setData(url: presenter?.postInfo?.postImage)
             
-                return imageCell
-            case 2:
-                let likesAndDateCell = tableView.dequeueReusableCell(withIdentifier: "LikesAndDateCell") as! LikesAndDateCell
-                likesAndDateCell.setData(likes: presenter?.postInfo?.likes_count ?? 0, date: presenter?.postInfo?.timeshamp ?? Int(Date().timeIntervalSince1970))
-                
-                return likesAndDateCell
-            default:
-                return cell
+            return imageCell
+        case 2:
+            let likesAndDateCell = tableView.dequeueReusableCell(withIdentifier: "LikesAndDateCell") as! LikesAndDateCell
+            likesAndDateCell.setData(likes: presenter?.postInfo?.likes_count ?? 0, date: presenter?.postInfo?.timeshamp ?? Int(Date().timeIntervalSince1970))
+            
+            return likesAndDateCell
+        default:
+            return cell
         }
     }
 }
 
 extension PostViewController: PostsViewPresenter {
-    func dataIsUpdated(result: Result<[Post], Error>) {
-        switch result {
-        case .success(_):
-            postTableView!.reloadData()
-        case .failure(let error):
-            let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-                                                                                                                 
-            self.present(alert, animated: true)
-        }
+    func dataIsUpdated() {
+        postTableView!.reloadData()
+    }
+    
+    func onError(error: Error) {
+        let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        self.present(alert, animated: true)
     }
 }

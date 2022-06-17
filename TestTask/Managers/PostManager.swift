@@ -9,19 +9,14 @@ import Foundation
 
 class PostManager {
     var networkManager = NetworkManager()
-    var posts = [Post]()
-    var postInfo: PostInfo?
     
-    func getPostsList(complition: @escaping (_ result: Result<Data, Error>) -> Void) {
-        var postsList: PostsList?
-        
-        networkManager.makeRequest(endpoint: Endpoint.posts.enpoint) { result in
+    func getPostsList(complition: @escaping (_ result: Result<[Post], Error>) -> Void) {
+        networkManager.makeRequest(endpoint: Endpoint.posts.path) { result in
             switch result {
             case .success(let data):
                 do {
-                    postsList = try JSONDecoder().decode(PostsList.self, from: data)
-                    self.posts =  postsList?.posts as! [Post]
-                    complition(.success(data))
+                    let postsList = try JSONDecoder().decode(PostsList.self, from: data)
+                    complition(.success(postsList.posts))
                 } catch {
                     complition(.failure(error))
                 }
@@ -32,16 +27,13 @@ class PostManager {
     }
     
     func getPostInfo(postID: Int,
-                     complition: @escaping (_ result: Result<Data, Error>) -> Void) {
-        var postByID: PostById?
-        
-        networkManager.makeRequest(endpoint: Endpoint.post(id: postID).enpoint) { [self] result in
+                     complition: @escaping (_ result: Result<PostInfo, Error>) -> Void) {
+        networkManager.makeRequest(endpoint: Endpoint.post(id: postID).path) { result in
             switch result {
             case .success(let data):
                 do {
-                    postByID = try JSONDecoder().decode(PostById.self, from: data)
-                    postInfo = postByID?.post
-                    complition(.success(data))
+                    let postByID = try JSONDecoder().decode(PostById.self, from: data)
+                    complition(.success(postByID.post))
                 } catch {
                     complition(.failure(error))
                 }
@@ -54,7 +46,8 @@ class PostManager {
     enum Endpoint {
         case posts
         case post(id: Int)
-        var enpoint: String {
+        
+        var path: String {
             switch self {
             case .posts:
                 return "/main.json"

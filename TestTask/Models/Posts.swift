@@ -16,7 +16,7 @@ struct Post: Decodable {
 }
 
 struct PostsList: Decodable {
-    let posts: [Post?]
+    let posts: [Post]
 }
 
 struct PostInfo: Decodable {

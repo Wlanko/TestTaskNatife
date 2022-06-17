@@ -8,34 +8,22 @@
 import UIKit
 
 protocol PostsViewPresenter: AnyObject {
-    func dataIsUpdated(result: Result<[Post], Error>)
+    func dataIsUpdated()
+    func onError(error: Error)
 }
 
 protocol PostCellDelegate: AnyObject {
     func push(postID: Int)
 }
 
-class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PostsViewController: UIViewController {
     @IBOutlet weak var mainTableView: UITableView?
     lazy var presenter = PostsPresenter(with: self)
     var sortBy: SortBy = .date
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "News Line"
-        //configureItems()
-        presenter.loadData(endpoint: "/main.json")
-        mainTableView?.dataSource = self
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.posts.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostCell
-        cell.setData(postinfo: presenter.posts[indexPath.row], delegate: self)
-        return cell
+        presenter.loadData()
     }
     
     @IBAction func sortButton(_ sender: Any) {
@@ -57,17 +45,29 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
 }
 
+extension PostsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.posts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostCell
+        cell.delegate = self
+        cell.setData(postinfo: presenter.posts[indexPath.row])
+        return cell
+    }
+}
+
 extension PostsViewController: PostsViewPresenter {
-    func dataIsUpdated(result: Result<[Post], Error>) {
-        switch result {
-        case .success(let posts):
+    func onError(error: Error) {
+        let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                                                                                                             
+        self.present(alert, animated: true)
+    }
+    
+    func dataIsUpdated() {
             mainTableView!.reloadData()
-        case .failure(let error):
-            let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-                                                                                                                 
-            self.present(alert, animated: true)
-        }
     }
 }
 

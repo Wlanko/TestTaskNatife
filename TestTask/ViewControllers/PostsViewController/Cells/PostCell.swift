@@ -17,17 +17,15 @@ class PostCell: UITableViewCell {
     var postID: Int = 0
     weak var delegate: PostCellDelegate?
     
-    func setData(postinfo: Post?, delegate: PostCellDelegate) {
+    func setData(postinfo: Post?) {
         titleLabel?.text = postinfo?.title
         descriptionLabel?.text = postinfo?.preview_text
         likesLabel?.text = "❤️ \(String(postinfo?.likes_count ?? 0))"
-        dateLabel?.text = dateManager.getTimeForPost(timestamp: Double(postinfo!.timeshamp))
+        dateLabel?.text = dateManager.getTimeForPost(timestamp: Double(postinfo?.timeshamp ?? 0))
         postID = postinfo?.postId ?? 0
-        
-        self.delegate = delegate
     }
+    
     @IBAction func expandButton(_ sender: Any) {
         delegate?.push(postID: postID)
     }
-    
 }

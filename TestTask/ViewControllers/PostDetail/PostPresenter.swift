@@ -10,11 +10,10 @@ import UIKit
 
 class PostPresenter {
     var postManager = PostManager()
-    var postInfo: PostInfo?
-    var postByID: PostById?
     var postID: Int
-    var error: Error? = nil
     weak var view: PostsViewPresenter?
+    
+    var postInfo: PostInfo?
     
     init(with postID: Int, view: PostsViewPresenter) {
         self.view = view
@@ -23,20 +22,20 @@ class PostPresenter {
     
     
     func loadData() {
-        postManager.getPostInfo(postID: postID) { result in
+        postManager.getPostInfo(postID: postID) { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
-            case .success(_):
-                self.postInfo = self.postManager.postInfo
+            case .success(let posts):
+                self.postInfo = posts
                 DispatchQueue.main.async {
-                    self.view?.dataIsUpdated(result: .success(self.postManager.posts))
+                    self.view?.dataIsUpdated()
                 }
             case .failure(let error):
-                self.error = error
                 DispatchQueue.main.async {
-                    self.view?.dataIsUpdated(result: .failure(error))
+                    self.view?.onError(error: error)
                 }
             }
-            
         }
     }
 }
