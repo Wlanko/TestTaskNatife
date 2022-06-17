@@ -25,20 +25,18 @@ class PostPresenter {
     func loadData() {
         postManager.getPostInfo(postID: postID) { result in
             switch result {
-            case .success(let data):
-                do {
-                    self.postByID = try JSONDecoder().decode(PostById.self, from: data)
-                    self.postInfo = self.postByID?.post
-                } catch {
-                    print("Is it really JSON")
+            case .success(_):
+                self.postInfo = self.postManager.postInfo
+                DispatchQueue.main.async {
+                    self.view?.dataIsUpdated(result: .success(self.postManager.posts))
                 }
             case .failure(let error):
                 self.error = error
-                print(error)
+                DispatchQueue.main.async {
+                    self.view?.dataIsUpdated(result: .failure(error))
+                }
             }
-            DispatchQueue.main.async {
-                self.view?.dataIsUpdated(error: self.error)
-            }
+            
         }
     }
 }

@@ -21,20 +21,18 @@ class PostsPresenter {
     func loadData(endpoint: String) {
         postManager.getPostsList() { result in
             switch result {
-            case .success(let data):
-                do {
-                    self.postsList = try JSONDecoder().decode(PostsList.self, from: data)
-                    self.posts =  self.postsList?.posts as! [Post]
-                } catch {
-                    print("Is that really JSON?")
+            case .success(_):
+                self.posts =  self.postManager.posts
+                DispatchQueue.main.async {
+                    self.view?.dataIsUpdated(result: .success(self.posts))
                 }
             case .failure(let error):
-                print(error)
                 self.error = error
+                DispatchQueue.main.async {
+                    self.view?.dataIsUpdated(result: .failure(error))
+                }
             }
-            DispatchQueue.main.async {
-                self.view?.dataIsUpdated(error: self.error)
-            }
+            
         }
     }
     
@@ -50,6 +48,6 @@ class PostsPresenter {
             }
         }
         
-        view?.dataIsUpdated(error: error)
+        view?.dataIsUpdated(result: .success(posts))
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PostsViewPresenter: AnyObject {
-    func dataIsUpdated(error: Error?)
+    func dataIsUpdated(result: Result<[Post], Error>)
 }
 
 protocol PostCellDelegate: AnyObject {
@@ -58,11 +58,11 @@ class PostsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 }
 
 extension PostsViewController: PostsViewPresenter {
-    func dataIsUpdated(error: Error?) {
-        switch error {
-        case nil:
+    func dataIsUpdated(result: Result<[Post], Error>) {
+        switch result {
+        case .success(let posts):
             mainTableView!.reloadData()
-        default:
+        case .failure(let error):
             let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
                                                                                                                  

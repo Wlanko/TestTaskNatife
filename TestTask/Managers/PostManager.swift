@@ -28,10 +28,6 @@ class PostManager {
             case .failure(let error):
                 print(error)
             }
-            
-            DispatchQueue.main.async {
-                //obj.dataSeted()
-            }
         }
     }
     
